@@ -62,7 +62,7 @@ services:
         max-size: "10m"
         max-file: "3"
     ports:
-      - ${REDIS_PORT}:${REDIS_PORT}
+      - ${WP_REDIS_PORT}:${WP_REDIS_PORT}
     entrypoint: redis-server --maxmemory 1024mb --maxmemory-policy allkeys-lru  
 
 volumes:

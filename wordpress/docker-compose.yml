@@ -1,7 +1,6 @@
 version: "3.9"
 
 services:
-  env_file: "serv.env"
 
   db:
     image: mariadb:11

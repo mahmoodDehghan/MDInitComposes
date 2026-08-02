@@ -6,9 +6,13 @@ services:
     image: mariadb:11
     restart: always
 
+    env_file: .env
+
+    container_name: db
+
     environment:
       MYSQL_DATABASE: wordpress
-      MYSQL_USER: wpuser
+      MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
 
@@ -24,14 +28,20 @@ services:
 
     restart: always
 
+    env_file: .env
+
     environment:
       WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}:${WP_DB_PORT}
-      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
 
     volumes:
       - ./wordpress:/var/www/html
+
+    depends_on:
+
+      - db  
 
   nginx:
 
@@ -56,6 +66,7 @@ services:
   redis:
     image: redis:latest
     restart: always
+    env_file: .env
     environment:
       WP_REDIS_HOST : ${WP_REDIS_HOST}
       WP_REDIS_PORT : ${WP_REDIS_PORT}

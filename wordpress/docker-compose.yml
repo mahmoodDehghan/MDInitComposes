@@ -78,3 +78,7 @@ services:
     ports:
       - ${WP_REDIS_PORT}:${WP_REDIS_PORT}
     entrypoint: redis-server --maxmemory 1024mb --maxmemory-policy allkeys-lru  
+
+volumes:
+
+  db_data:

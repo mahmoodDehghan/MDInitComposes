@@ -12,6 +12,9 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
 
+    ports:
+      - ${WP_DB_PORT}:${WP_DB_PORT}  
+
     volumes:
       - db_data:/var/lib/mysql
 
@@ -22,8 +25,7 @@ services:
     restart: always
 
     environment:
-
-      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
+      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}:${WP_DB_PORT}
       WORDPRESS_DB_USER: wpuser
       WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
       WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
